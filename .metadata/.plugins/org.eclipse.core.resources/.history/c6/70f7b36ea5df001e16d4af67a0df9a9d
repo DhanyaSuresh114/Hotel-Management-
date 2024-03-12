@@ -1,0 +1,14 @@
+package com.microservice.user.external.services;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.microservice.user.entity.Rating;
+
+@FeignClient(name= "HOTEL-SERVICE")
+public interface RatingService {
+  
+	@GetMapping()
+	Rating getRatings(@PathVariable String ratingId);
+}
+

@@ -1,0 +1,6 @@
+package com.microservice.hotel.external.service;
+
+
+public class RatingService {
+
+}

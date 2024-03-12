@@ -1,0 +1,6 @@
+package com.microservice.entity;
+
+@Entity
+public class Hotel {
+
+}

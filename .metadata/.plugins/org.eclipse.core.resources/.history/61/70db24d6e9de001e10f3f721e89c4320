@@ -1,0 +1,23 @@
+package com.microservice.hotel.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.microservice.hotel.service.HotelService;
+
+@RestController
+@RequestMapping("/hotels")
+public class HotelController {
+
+	@Autowired
+	private HotelService hotelService;
+
+	// create
+	@PostMapping
+	public ResponseEntity<Hotel> createSingleHotel(@RequestBody Hotel hotel){
+		
+		
+	}
+	
+}

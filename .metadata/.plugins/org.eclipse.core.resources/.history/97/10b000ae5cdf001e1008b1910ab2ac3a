@@ -1,0 +1,13 @@
+package com.microservice.rating.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.microservice.rating.entity.Rating;
+
+//public interface RatingRepository extends MongoRepository<Rating, String>{
+//
+//}
+
+public interface RatingRepository extends JpaRepository<Rating, String>{
+
+}

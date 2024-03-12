@@ -1,0 +1,5 @@
+package com.microservice.hotel.entity;
+
+public class Rating {
+
+}

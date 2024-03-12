@@ -1,0 +1,70 @@
+package com.microservice.user.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.microservice.user.entity.User;
+import com.microservice.user.exception.ResourceNotFoundException;
+import com.microservice.user.repository.UserRepository;
+import com.microservice.user.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	private Logger logger=LoggerFactory.getLogger(UserServiceImpl.class);
+
+	@Override
+	public User saveUser(User user) {
+		// to generate unique id in string
+		String randomeUserId = UUID.randomUUID().toString();
+		user.setUserId(randomeUserId);
+		return userRepository.save(user);
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
+	}
+
+	@Override
+	public User getUser(String userId) {
+		//get User from database with the help of user repository
+		User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User with given id is not found: " + userId));
+		//fetch rating of the above user from Rating Service
+		//http://localhost:8083/ratings/users/dcdfe9d9-3e14-4201-9f0d-d9eac68a4ed6
+		System.out.println("Jjj");
+		ArrayList forObject = restTemplate.getForObject("http://localhost:8083/ratings/users/dcdfe9d9-3e14-4201-9f0d-d9eac68a4ed6", ArrayList.class);
+		logger.info("",forObject);
+		return user;
+				
+	}
+
+	@Override
+	public String deleteUserId(String userId) {
+		// TODO Auto-generated method stub
+		userRepository.deleteById(userId);
+		return "Deleted Successfully";
+	}
+
+//	@Override
+//	public User updateUserById(String userId) {
+//		// TODO Auto-generated method stub
+//		Optional<User> byId = userRepository.findById(userId);
+//		return userRepository.saveAll(byId);
+//	}
+
+}

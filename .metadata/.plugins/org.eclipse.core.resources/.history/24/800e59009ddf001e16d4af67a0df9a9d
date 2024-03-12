@@ -1,0 +1,12 @@
+package com.microservice.user.entity;
+
+public class Hotel {
+
+	private String hoteId;
+
+	private String name;
+
+	private String location;
+
+	private String about;
+}

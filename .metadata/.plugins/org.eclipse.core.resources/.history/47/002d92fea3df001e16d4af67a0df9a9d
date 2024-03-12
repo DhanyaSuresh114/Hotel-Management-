@@ -1,0 +1,8 @@
+package com.microservice.user.external.services;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient("HOTEL-SERVICE")
+public interface HotelService {
+
+}
